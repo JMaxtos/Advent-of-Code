@@ -28,6 +28,8 @@ public class Day2_part1 extends Day2 {
                 return false;
             } else {
 
+                int INCREASING = 1;
+                int DECREASING=0;
                 if (report[i] > report[i + 1] && i != 0 && validate[i - 1] == INCREASING) {
                    return false;
                 }
