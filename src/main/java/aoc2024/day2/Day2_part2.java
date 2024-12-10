@@ -1,8 +1,8 @@
 package aoc2024.day2;
 
-public class Day2_part1 extends Day2 {
+public class Day2_part2 extends Day2 {
 
-    public Day2_part1() {
+    public Day2_part2() {
         super();
         int safeReports = checkLevels();
         System.out.println("Number of safe reports: " + safeReports);
@@ -14,7 +14,7 @@ public class Day2_part1 extends Day2 {
             if (report == null) {
                 continue;
             }
-            if (isSafeReport(report)) {
+            if (isSafeReport(report) || canBeMadeSafe(report)) {
                 safeReports++;
             }
         }
@@ -27,11 +27,10 @@ public class Day2_part1 extends Day2 {
             if (Math.abs(report[i] - report[i + 1]) > 3) {
                 return false;
             } else {
-
                 int INCREASING = 1;
-                int DECREASING=0;
+                int DECREASING = 0;
                 if (report[i] > report[i + 1] && i != 0 && validate[i - 1] == INCREASING) {
-                   return false;
+                    return false;
                 }
                 if (report[i] < report[i + 1] && i != 0 && validate[i - 1] == DECREASING) {
                     return false;
@@ -47,8 +46,21 @@ public class Day2_part1 extends Day2 {
                 }
             }
         }
-
         return true;
     }
 
+    private boolean canBeMadeSafe(int[] report) {
+        for (int i = 0; i < report.length; i++) {
+            int[] modifiedReport = new int[report.length - 1];
+            for (int j = 0, k = 0; j < report.length; j++) {
+                if (j != i) {
+                    modifiedReport[k++] = report[j];
+                }
+            }
+            if (isSafeReport(modifiedReport)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
