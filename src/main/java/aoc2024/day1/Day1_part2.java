@@ -16,9 +16,13 @@ public class Day1_part2 extends Day1 {
                     count++;
                 }
             }
-            totalAppearances += (count  * leftNumber);
+            totalAppearances += (count * leftNumber);
 
         }
         return totalAppearances;
+    }
+
+    static public void main(String[] args) {
+        Day1_part2 d = new Day1_part2();
     }
 }

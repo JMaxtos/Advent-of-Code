@@ -23,5 +23,9 @@ public class Day1_part1 extends Day1 {
         return distance;
     }
 
+    public static void main(String[] args) {
+        Day1_part1 day1 = new Day1_part1();
+    }
+
 
 }

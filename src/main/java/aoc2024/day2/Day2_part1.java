@@ -29,9 +29,9 @@ public class Day2_part1 extends Day2 {
             } else {
 
                 int INCREASING = 1;
-                int DECREASING=0;
+                int DECREASING = 0;
                 if (report[i] > report[i + 1] && i != 0 && validate[i - 1] == INCREASING) {
-                   return false;
+                    return false;
                 }
                 if (report[i] < report[i + 1] && i != 0 && validate[i - 1] == DECREASING) {
                     return false;
@@ -51,4 +51,7 @@ public class Day2_part1 extends Day2 {
         return true;
     }
 
+    public static void main(String[] args) {
+        Day2_part1 d2 = new Day2_part1();
+    }
 }
