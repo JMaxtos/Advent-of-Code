@@ -63,4 +63,8 @@ public class Day2_part2 extends Day2 {
         }
         return false;
     }
+
+    static public void main(String[] args) {
+        Day2_part2 d = new Day2_part2();
+    }
 }
