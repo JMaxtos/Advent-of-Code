@@ -3,8 +3,8 @@ package aoc2024.day3;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class part2 extends Day3 {
-    part2() {
+public class Day3part2 extends Day3 {
+    Day3part2() {
         super();
         int finalResult = calculateMemory();
         System.out.println("Part2: What do you get if you add up all of the results of the multiplications? " + finalResult);
@@ -13,38 +13,31 @@ public class part2 extends Day3 {
 
     private int calculateMemory() {
         int totalMemory = 0;
-
+        boolean willMultiply = true;
         //Defines the Pattern
         Pattern pattern = Pattern.compile("mul\\((\\d+),(\\d+)\\)");
         Pattern doPattern = Pattern.compile("do\\s*\\(\\s*\\)");
         Pattern dontPattern = Pattern.compile("don't\\s*\\(\\s*\\)");
-
-        boolean willMultiply = true;
         for (String corrupted : input) {
-            // Checks for all the matches of the pattern
-            Matcher mulMatcher = pattern.matcher(corrupted);
-            Matcher doMatcher = doPattern.matcher(corrupted);
-            Matcher dontMatcher = dontPattern.matcher(corrupted);
-
-            while (mulMatcher.find()) {
+            Matcher matcher = Pattern.compile(pattern.pattern() + "|" + doPattern.pattern() + "|" + dontPattern.pattern()).matcher(corrupted);
+            while (matcher.find()) {
+                if (matcher.group(1) != null) {
                     if (willMultiply) {
-                        int x = Integer.parseInt(mulMatcher.group(1));
-                        int y = Integer.parseInt(mulMatcher.group(2));
-                        System.out.println(x + " " + y);
+                        int x = Integer.parseInt(matcher.group(1));
+                        int y = Integer.parseInt(matcher.group(2));
                         totalMemory += x * y;
                     }
+                } else if (matcher.group(0).startsWith("don't")) {
+                    willMultiply = false;
+                } else if (matcher.group(0).startsWith("do")) {
+                    willMultiply = true;
+
                 }
-            while (doMatcher.find()) {
-                willMultiply = true;
             }
-            while (dontMatcher.find()) {
-                willMultiply = false;
-            }
-
-            }
-
+        }
         return totalMemory;
     }
-
-
+    public static void main(String[] args) {
+        Day3part2 d = new Day3part2();
+    }
 }
