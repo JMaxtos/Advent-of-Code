@@ -21,10 +21,8 @@ def partOne(file):
         if direction == 'R':
             currentPoiting = (currentPoiting + numRotations)%100
         
-        if currentPoiting == 0 :
+        if currentPoiting == MIN_POITING :
             password+=1
-
-        print(f"Current Poiting to: {currentPoiting}")
 
     print(f"Password:{password}")
 
@@ -35,7 +33,6 @@ def partTwo(file):
     password = 0
 
     currentPoiting=INITIAL_POITING
-    previousPoiting = INITIAL_POITING
 
     for line in file:
         direction = line[0]
