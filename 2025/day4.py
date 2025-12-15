@@ -34,4 +34,24 @@ def checkAdjacentPositions(line,column,fileContent):
     return adjacentRolls < 4
 
     
+def partTwo():
+    file = open(FILENAME)
+    totalRolls = 0
+    fileContent = {}
+    changed = True
+    while changed:
+        changed = False
+        for line,content in enumerate(file):
+            fileContent[line]= list(content.strip())
+        
+        for line_index, line_content in fileContent.items():
+            for column_index,char in enumerate(line_content):
+                if char == '@':
+                    if checkAdjacentPositions(line_index,column_index,fileContent):
+                        fileContent[line_index][column_index] = '.'
+                        totalRolls +=1
+                        changed = True
+    return totalRolls
+
 print(f"Part One: {partOne()}")
+print(f"Part Two: {partTwo()}")
